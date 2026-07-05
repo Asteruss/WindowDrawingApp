@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:WindowDrawingApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Глобальные шаблоны доступны во ВСЕХ окнах приложения -->
+                <ResourceDictionary Source="/DataTemplates/PictuteTemplate.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

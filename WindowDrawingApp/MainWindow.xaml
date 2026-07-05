@@ -4,9 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WindowDrawingApp"
+        xmlns:dataTemplates="wind"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="" 
+        WindowState="Maximized" 
+        WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.Row="0" 
+              Grid.Column="0" 
+              Grid.ColumnSpan="3">
+            <MenuItem Header="Создать новый" Command="{Binding CreatePicture}"/>
+            <MenuItem Header="Открыть существующий"/>
+            <MenuItem Header="Сохранить"/>
 
+        </Menu>
+
+        <!--Чертеж-->
+        <ContentControl Grid.Row="1" Grid.Column="1" 
+                        Content="{Binding CurrentPicture}" 
+                        Margin="50"/>
     </Grid>
 </Window>

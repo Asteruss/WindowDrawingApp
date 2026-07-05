@@ -1,0 +1,60 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:model="clr-namespace:WindowDrawingApp.Models">
+    <DataTemplate DataType="{x:Type model:Picture}">
+        <Border BorderBrush="DarkGray" BorderThickness="2" Background="White">
+            <Grid>
+                <!-- Рамка из 3 строк и 3 колонок для размещения брусов -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Верхний брус -->
+                    <RowDefinition Height="*"/>
+                    <!-- Центр (Левый брус + Пространство + Правый брус) -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Нижний брус -->
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Левый брус -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Световое пространство -->
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Правый брус -->
+                </Grid.ColumnDefinitions>
+
+                <!-- 1. Верхний брус -->
+                <!-- Height привязан к Width бруса (толщине). Длина растягивается на всю ширину -->
+                <Border Grid.Row="0" Grid.ColumnSpan="3" 
+                            Height="{Binding WindowFrame.Top.Width}" 
+                            BorderBrush="Black"
+                            BorderThickness="2"/>
+
+                <!-- 2. Нижний брус -->
+                <Border Grid.Row="2" Grid.ColumnSpan="3" 
+                            Height="{Binding WindowFrame.Bottom.Width}" 
+                            BorderBrush="Black"
+                            BorderThickness="2"/>
+
+                <!-- 3. Левый брус -->
+                <!-- Width привязан к Width бруса (толщине). Высота растягивается на всю высоту -->
+                <Border Grid.Row="1" Grid.Column="0" 
+                            Width="{Binding WindowFrame.Left.Width}" 
+                            BorderBrush="Black"
+                            BorderThickness="2"/>
+
+                <!-- 4. Правый брус -->
+                <Border Grid.Row="1" Grid.Column="2" 
+                            Width="{Binding WindowFrame.Right.Width}"
+                            BorderBrush="Black"
+                            BorderThickness="2"/>
+
+                <!-- 5. Рекурсивный контейнер для светового пространства -->
+                <ContentControl Grid.Row="1" Grid.Column="1" 
+                                    Content="{Binding WindowFrame.RootSpace}"/>
+            </Grid>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type model:LightSpace}">
+        <Border Background="AliceBlue" BorderBrush="LightGray" BorderThickness="1"/>
+    </DataTemplate>
+</ResourceDictionary>
