@@ -3,61 +3,17 @@
                     xmlns:model="clr-namespace:WindowDrawingApp.Models"
                     xmlns:behaviors="clr-namespace:WindowDrawingApp.Behaviors">
     <DataTemplate DataType="{x:Type model:Picture}">
-        <Border BorderBrush="DarkGray" 
-                BorderThickness="2" 
-                Background="White"
+        <Border
+                Padding="5"
+                Margin="5"
                 Height="{Binding Height}"
                 Width="{Binding Width}">
-
             <Border.InputBindings>
-                <MouseBinding MouseAction="LeftClick" 
-                          Command="{Binding DataContext.SelectNodeCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
-                          CommandParameter="{x:Null}"/>
+                <MouseBinding MouseAction="LeftClick" Command="{Binding DataContext.SelectNodeCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{x:Null}"/>
             </Border.InputBindings>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
 
-                <ContentControl Grid.Row="0" Grid.Column="1"
-                                behaviors:BeamVisual.Orientation="Horizontal"
-                                behaviors:BeamVisual.ThumbSide="End"
-                                Content="{Binding WindowFrame.Top}"
-                        />
-
-                <!-- НИЖНИЙ БРУС -->
-                <ContentControl Grid.Row="2" Grid.Column="1"
-                Content="{Binding WindowFrame.Bottom}"
-                behaviors:BeamVisual.Orientation="Horizontal"
-                behaviors:BeamVisual.ThumbSide="Start"/>
-
-                <!-- ЛЕВЫЙ БРУС -->
-                <ContentControl Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"
-                Content="{Binding WindowFrame.Left}"
-                behaviors:BeamVisual.Orientation="Vertical"
-                behaviors:BeamVisual.ThumbSide="End"/>
-
-                <!-- ПРАВЫЙ БРУС -->
-                <ContentControl Grid.Row="0" Grid.RowSpan="3" Grid.Column="2"
-                Content="{Binding WindowFrame.Right}"
-                behaviors:BeamVisual.Orientation="Vertical"
-                behaviors:BeamVisual.ThumbSide="Start"/>
-
-
-                <!-- 5. Рекурсивный контейнер для светового пространства -->
-                <ContentControl Grid.Row="1" Grid.Column="1" 
-                                    Content="{Binding WindowFrame.RootSpace}"/>
-            </Grid>
+            <ContentControl Content="{Binding WindowFrame}" Margin="5"/>
         </Border>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type model:LightSpace}">
-        <Border Background="AliceBlue" BorderBrush="LightGray" BorderThickness="1"/>
-    </DataTemplate>
+  
 </ResourceDictionary>

@@ -1,6 +1,6 @@
 ﻿namespace WindowDrawingApp.Models;
 
-public class WindowFrame
+public class WindowFrame : WindowNode
 {
     private double _windowWidth = 0;
     private double _windowHeight = 0;
@@ -9,7 +9,11 @@ public class WindowFrame
     public Beam Right { get; }
     public Beam Top { get; }
     public Beam Bottom { get; }
-    public FrameType FrameType { get => _frameType; set { _frameType = value; Recalculate(); } } 
+    public FrameType FrameType
+    {
+        get => _frameType;
+        set { SetProperty(ref _frameType, value); Recalculate(); }
+    }
 
     public LightSpace RootSpace { get; private set; }
 
@@ -21,10 +25,10 @@ public class WindowFrame
         RootSpace = new LightSpace();
 
 
-        Left = new Beam(BaseSizes.BeamWidth, _windowHeight);
-        Right = new Beam(BaseSizes.BeamWidth, _windowHeight);
-        Top = new Beam(BaseSizes.BeamWidth, _windowWidth - Left.Width - Right.Width);
-        Bottom = new Beam(BaseSizes.BeamWidth, _windowWidth - Left.Width - Right.Width);
+        Left = new Beam(BaseSizes.BeamWidth, _windowHeight) { DisplayName="Левый брус рамы", Parent=this};
+        Right = new Beam(BaseSizes.BeamWidth, _windowHeight) { DisplayName = "Правый брус рамы", Parent = this };
+        Top = new Beam(BaseSizes.BeamWidth, _windowWidth - Left.Width - Right.Width) { DisplayName = "Верхний брус рамы", Parent = this };
+        Bottom = new Beam(BaseSizes.BeamWidth, _windowWidth - Left.Width - Right.Width) { DisplayName = "Нижний брус рамы", Parent = this };
 
         Left.WidthChanged += Recalculate;
         Right.WidthChanged += Recalculate;

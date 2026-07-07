@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WindowDrawingApp"
-        xmlns:dataTemplates="wind"
         mc:Ignorable="d"
         Title="" 
         WindowState="Maximized" 
@@ -33,6 +32,7 @@
                         Content="{Binding CurrentPicture}" 
                         Margin="50"/>
 
+        <!--Свойства и функции-->
         <StackPanel Grid.Row="1" Grid.Column="2">
             <TextBlock Text="{Binding SelectedNode.DisplayName}"/>
         </StackPanel>
