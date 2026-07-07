@@ -1,6 +1,8 @@
-﻿namespace WindowDrawingApp.Models;
+﻿using WindowDrawingApp.ViewModels;
 
-public class WindowNode
+namespace WindowDrawingApp.Models;
+
+public class WindowNode : NotifyPropertyChanged
 {
     public WindowNode Parent { get; set; }
     public virtual string DisplayName { get; protected set; } = "Неизвестный элемент";

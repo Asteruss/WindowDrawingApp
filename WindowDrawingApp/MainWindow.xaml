@@ -32,5 +32,9 @@
         <ContentControl Grid.Row="1" Grid.Column="1" 
                         Content="{Binding CurrentPicture}" 
                         Margin="50"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="2">
+            <TextBlock Text="{Binding SelectedNode.DisplayName}"/>
+        </StackPanel>
     </Grid>
 </Window>

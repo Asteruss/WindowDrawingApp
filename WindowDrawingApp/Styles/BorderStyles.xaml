@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:WindowDrawingApp.Converters">
+    
+    <converters:IsSelectedConverter x:Key="IsSelectedConverter"/>
+    <Style TargetType="Border" x:Key="SelectionBorderStyle">
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Background" Value="Transparent"/>
+
+        <Style.Triggers>
+            <DataTrigger Value="True">
+                <DataTrigger.Binding>
+                    <MultiBinding Converter="{StaticResource IsSelectedConverter}">
+                        <Binding />
+                        <Binding Path="DataContext.SelectedNode" RelativeSource="{RelativeSource AncestorType=Window}" />
+                    </MultiBinding>
+                </DataTrigger.Binding>
+                <Setter Property="BorderBrush" Value="DodgerBlue"/>
+                <Setter Property="BorderThickness" Value="3"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

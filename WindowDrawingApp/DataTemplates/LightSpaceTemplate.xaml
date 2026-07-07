@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:model="clr-namespace:WindowDrawingApp.Models"
+                    xmlns:behaviors="clr-namespace:WindowDrawingApp.Behaviors">
+    <DataTemplate DataType="{x:Type model:LightSpace}">
+        <Border Background="AliceBlue" 
+               >
+            <Border.InputBindings>
+                <MouseBinding MouseAction="LeftClick" 
+                          Command="{Binding DataContext.SelectNodeCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                          CommandParameter="{Binding}"/>
+            </Border.InputBindings>
+
+            <ContentControl Content="{Binding Content}"/>
+        </Border>
+    </DataTemplate>
+</ResourceDictionary>

@@ -1,4 +1,6 @@
-﻿namespace WindowDrawingApp.Models;
+﻿using WindowDrawingApp.Behaviors;
+
+namespace WindowDrawingApp.Models;
 
 // брус
 // длина фиксированна к габаритам
@@ -14,16 +16,27 @@ public class Beam : WindowNode
             if (_width != value)
             {
                 _width = value;
-                WidthChanged?.Invoke(); 
+                if (_width <= 5)
+                    _width = 5;
+
+                WidthChanged?.Invoke();
+                OnPropertyChanged();
             }
         }
     }
-    public double Length { get; set; }
+
+    private double _length;
+    public double Length
+    {
+        get => _length;
+        set { if (_length != value) { _length = value; OnPropertyChanged(); } }
+    }
+
 
     public Beam(double width, double length)
     {
         _width = width;
-        Length = length;
+        _length = length;
     }
     public event Action WidthChanged;
 }

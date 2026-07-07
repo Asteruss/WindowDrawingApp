@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using WindowDrawingApp.Models;
 
@@ -15,6 +11,8 @@ public class MainViewModel : NotifyPropertyChanged
 
     private WindowNode _selectedNode;
     public WindowNode SelectedNode { get => _selectedNode; set => SetProperty(ref _selectedNode, value); }
+    public ObservableCollection<WindowNode> Nodes { get; set; }
+
     private RelayCommand _createPicture;
     public RelayCommand CreatePicture
     {
@@ -26,7 +24,19 @@ public class MainViewModel : NotifyPropertyChanged
                 if (res != MessageBoxResult.Yes) return;
             }
 
-            CurrentPicture = new Picture(800, 1000);
+            CurrentPicture = new Picture(600, 800);
         });
     }
+    private RelayCommand<(object Target, double Delta)> _dragBeamCommand;
+    public RelayCommand<(object Target, double Delta)> DragBeamCommand { get => _dragBeamCommand ??= new(ExecuteDragBeam); }
+
+    private void ExecuteDragBeam((object Target, double Delta) args)
+    {
+        if (args.Target is Beam beam)
+            if (args.Delta != 0)
+                beam.Width = Math.Max(10, beam.Width + args.Delta);
+    }
+
+    private RelayCommand<object> _selectNodeCommand;
+    public RelayCommand<object> SelectNodeCommand { get => _selectNodeCommand ??= new(node => SelectedNode = node as WindowNode); }
 }
